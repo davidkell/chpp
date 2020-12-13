@@ -21,8 +21,13 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*/*"],
-      "js": ["content.js"]
+      "matches": [
+        "*://find-and-update.company-information.service.gov.uk/company/*"
+      ],
+      "js": ["content.js"],
+      "css": ["tailwind.css"],
+      "run_at": "document_idle"
     }
-  ]
+  ],
+  "permissions": ["https://api.company-information.service.gov.uk/"]
 }

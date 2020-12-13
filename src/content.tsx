@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "tailwindcss/tailwind.css";
 import Ownership from "./Ownership";
 
 const Main = () => {

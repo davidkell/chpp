@@ -35,7 +35,6 @@
     "@fortawesome/react-fontawesome": "^0.1.13",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-hot-loader": "^4.13.0",
-    "tailwindcss": "^2.0.2"
+    "react-hot-loader": "^4.13.0"
   }
 }
