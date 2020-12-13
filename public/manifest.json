@@ -1,8 +1,8 @@
 {
-  "name": "Chrome Extension Boilerplate",
-  "description": "Chrome Extension boilerplate created with React Typescript.",
+  "name": "Companies House ++",
+  "description": "Embedded company ownership information for Companies House.",
   "manifest_version": 2,
-  "version": "1.0.0",
+  "version": "0.1.0",
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",
