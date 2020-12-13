@@ -44,12 +44,16 @@ const fetchPsc = async (companyNumber: string) => {
 };
 
 const searchCorporate = async (pscName: string) => {
-  const search = await fetchCache(`/search/companies?q=${encodeURI(pscName)}`);
+  const search = await fetchCache(
+    `/search/companies?q=${encodeURI(pscName.toUpperCase())}`
+  );
   return search.items[0];
 };
 
 const searchIndividual = async (pscName: string) => {
-  const search = await fetchCache(`/search/officers?q=${encodeURI(pscName)}`);
+  const search = await fetchCache(
+    `/search/officers?q=${encodeURI(pscName).toUpperCase()}`
+  );
   return search.items[0];
 };
 

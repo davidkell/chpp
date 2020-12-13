@@ -25,7 +25,7 @@ const Individual: React.FC<Props> = ({ psc }) => {
   return (
     <span className="flex">
       <FontAwesomeIcon icon={faUser} />
-      {!individualPsc ? (
+      {!individualPsc || individualPsc.title !== psc.name.toUpperCase() ? (
         <span className="font-bold ml-4 mr-2">{psc.name}</span>
       ) : (
         <a className="font-bold ml-4 mr-2" href={individualPsc.links.self}>

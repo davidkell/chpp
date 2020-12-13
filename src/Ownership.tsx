@@ -6,10 +6,10 @@ import Individual from "./Individual";
 
 interface Props {
   companyNumber: string;
-  level: number;
+  parents?: string[];
 }
 
-const Ownership: React.FC<Props> = ({ companyNumber, level }) => {
+const Ownership: React.FC<Props> = ({ companyNumber, parents = [] }) => {
   const [pscs, setPscs] = useState<any[]>();
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Ownership: React.FC<Props> = ({ companyNumber, level }) => {
             )
             .map((psc) => (
               <div className="my-2">
-                <Company psc={psc} level={level} />
+                <Company psc={psc} parents={parents} />
               </div>
             ))}
           {pscs

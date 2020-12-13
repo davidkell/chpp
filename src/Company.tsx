@@ -6,10 +6,10 @@ import { faBuilding } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
   psc: any;
-  level: number;
+  parents: string[];
 }
 
-const Company: React.FC<Props> = ({ psc, level }) => {
+const Company: React.FC<Props> = ({ psc, parents }) => {
   const [corporatePsc, setCorporatePsc] = useState<any>();
 
   useEffect(() => {
@@ -21,8 +21,6 @@ const Company: React.FC<Props> = ({ psc, level }) => {
       (new_psc: any) => setCorporatePsc(new_psc)
     );
   }, []);
-
-  if (level > 5) return <span>Possible loop?</span>;
 
   return (
     <div>
@@ -39,12 +37,16 @@ const Company: React.FC<Props> = ({ psc, level }) => {
               naturesOfControl={corporatePsc.natures_of_control}
             />
           </div>
-          <div className="ml-8">
-            <Ownership
-              companyNumber={corporatePsc.company_number}
-              level={level + 1}
-            />
-          </div>
+          {!parents.includes(corporatePsc.company_number) ? (
+            <div className="ml-8">
+              <Ownership
+                companyNumber={corporatePsc.company_number}
+                parents={[...parents, corporatePsc.company_number]}
+              />
+            </div>
+          ) : (
+            "Loop"
+          )}
         </>
       )}
     </div>

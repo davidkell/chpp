@@ -7,10 +7,7 @@ const Main = () => {
     <div className={"my-extension"}>
       <div className="p-3 border-solid border-0 border-t">
         <p className="text-4xl font-bold">Ownership structure</p>
-        <Ownership
-          companyNumber={window.location.pathname.split("/")[2]}
-          level={0}
-        />
+        <Ownership companyNumber={window.location.pathname.split("/")[2]} />
       </div>
     </div>
   );
