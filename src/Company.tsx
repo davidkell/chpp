@@ -24,31 +24,30 @@ const Company: React.FC<Props> = ({ psc, parents }) => {
 
   return (
     <div>
-      {!corporatePsc ? (
-        <span>{psc.name}</span>
-      ) : (
-        <>
-          <div className="flex px-2">
-            <FontAwesomeIcon icon={faBuilding} />{" "}
-            <a className="font-bold mx-2" href={corporatePsc.links.self}>
-              {corporatePsc.title}
-            </a>
-            <NaturesOfControl
-              naturesOfControl={corporatePsc.natures_of_control}
+      <div className="flex px-2">
+        <FontAwesomeIcon icon={faBuilding} />
+        {!corporatePsc ? (
+          // || corporatePsc.title !== psc.name.toUpperCase()
+          <span>{psc.name}</span>
+        ) : (
+          <a className="font-bold mx-2" href={corporatePsc.links.self}>
+            {corporatePsc.title}
+          </a>
+        )}
+        <NaturesOfControl naturesOfControl={psc.natures_of_control} />
+      </div>
+      {corporatePsc &&
+        // corporatePsc.title === psc.name.toUpperCase() &&
+        (!parents.includes(corporatePsc.company_number) ? (
+          <div className="ml-8">
+            <Ownership
+              companyNumber={corporatePsc.company_number}
+              parents={[...parents, corporatePsc.company_number]}
             />
           </div>
-          {!parents.includes(corporatePsc.company_number) ? (
-            <div className="ml-8">
-              <Ownership
-                companyNumber={corporatePsc.company_number}
-                parents={[...parents, corporatePsc.company_number]}
-              />
-            </div>
-          ) : (
-            "Loop"
-          )}
-        </>
-      )}
+        ) : (
+          "Loop"
+        ))}
     </div>
   );
 };
