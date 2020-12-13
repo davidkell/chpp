@@ -44,6 +44,7 @@ const Ownership: React.FC<Props> = ({ companyNumber, level }) => {
                   ![
                     "corporate-entity-person-with-significant-control",
                     "persons-with-significant-control-statement",
+                    "none",
                   ].includes(psc.kind)
               )
               .map((psc) => (
@@ -60,6 +61,16 @@ const Ownership: React.FC<Props> = ({ companyNumber, level }) => {
               )
               .map((psc) => (
                 <span className="px-2">{psc.statement}</span>
+              ))}
+          </div>
+          <div className="flex flex-col">
+            {pscs
+              .filter((psc) => psc.kind === "none")
+              .map((_) => (
+                <span className="px-2">
+                  There are no persons with significant control or statements
+                  available for this company.
+                </span>
               ))}
           </div>
         </div>

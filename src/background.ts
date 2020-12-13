@@ -17,6 +17,14 @@ const fetch_psc = async (companyNumber: string) => {
     );
 
     const statements = await result.json();
+
+    if (statements.errors) {
+      return [
+        {
+          kind: "none",
+        },
+      ];
+    }
     return statements.items;
   }
 
