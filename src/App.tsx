@@ -1,23 +1,22 @@
 import * as React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src="icon128.png" className="App-logo" alt="logo" />
+        <h2>Companies House ++</h2>
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Hierarchical ownership view for any company. View{" "}
+          <a
+            href="https://find-and-update.company-information.service.gov.uk/company/09609115"
+            className="App-link"
+          >
+            example
+          </a>
+          .
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
