@@ -29,5 +29,5 @@
       "run_at": "document_idle"
     }
   ],
-  "permissions": ["https://api.company-information.service.gov.uk/"]
+  "permissions": ["https://api.company-information.service.gov.uk/", "storage"]
 }

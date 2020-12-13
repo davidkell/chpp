@@ -1,22 +1,34 @@
+import "chrome-extension-async";
+
 const CH_URL = "https://api.company-information.service.gov.uk";
 const headers = {
   Authorization: "hcgHBMyoQKYEo3KhQXHIO0d_akc5yGaT8JVYMW-2",
 };
 
+const fetchCache = async (path: string) => {
+  // chrome.storage.sync maximum bytes per item is ~8kb
+  const cached = await chrome.storage.local.get({ [path]: null });
+
+  if (cached[path] !== null) {
+    return cached[path];
+  }
+
+  const result = fetch(`${CH_URL}/${path}`, { headers });
+  const json = await (await result).json();
+
+  chrome.storage.local.set({ [path]: json });
+  return json;
+};
+
 const fetchPsc = async (companyNumber: string) => {
-  const result = await fetch(
-    `${CH_URL}/company/${companyNumber}/persons-with-significant-control`,
-    { headers }
+  const pscs = await fetchCache(
+    `/company/${companyNumber}/persons-with-significant-control`
   );
-  const pscs = await result.json();
 
   if (pscs.errors) {
-    const result = await fetch(
-      `${CH_URL}/company/${companyNumber}/persons-with-significant-control-statements`,
-      { headers }
+    const statements = await fetchCache(
+      `/company/${companyNumber}/persons-with-significant-control-statements`
     );
-
-    const statements = await result.json();
 
     if (statements.errors) {
       return [
@@ -32,25 +44,16 @@ const fetchPsc = async (companyNumber: string) => {
 };
 
 const searchCorporate = async (pscName: string) => {
-  const result = await fetch(
-    `${CH_URL}/search/companies?q=${encodeURI(pscName)}`,
-    { headers }
-  );
-  const search = await result.json();
+  const search = await fetchCache(`/search/companies?q=${encodeURI(pscName)}`);
   return search.items[0];
 };
 
 const searchIndividual = async (pscName: string) => {
-  const result = await fetch(
-    `${CH_URL}/search/officers?q=${encodeURI(pscName)}`,
-    { headers }
-  );
-  const search = await result.json();
+  const search = await fetchCache(`/search/officers?q=${encodeURI(pscName)}`);
   return search.items[0];
 };
 
-//@ts-ignore
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
   if (request.contentScriptQuery == "queryPSCs") {
     fetchPsc(request.companyNumber).then(sendResponse);
     return true;
@@ -63,4 +66,5 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     searchIndividual(request.companyName).then(sendResponse);
     return true;
   }
+  return false;
 });
