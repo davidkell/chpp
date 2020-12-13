@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Ownership from "./Ownership";
+import "./App.css";
 
 const Main = () => {
   return (

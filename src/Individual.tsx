@@ -23,7 +23,7 @@ const Individual: React.FC<Props> = ({ psc }) => {
   console.log(individualPsc);
 
   return (
-    <span className="flex">
+    <span className="flex items-center">
       <FontAwesomeIcon icon={faUser} />
       {!individualPsc || individualPsc.title !== psc.name.toUpperCase() ? (
         <span className="font-bold ml-4 mr-2">{psc.name}</span>
