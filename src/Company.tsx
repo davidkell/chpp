@@ -32,7 +32,9 @@ const Company: React.FC<Props> = ({ psc, level }) => {
         <>
           <div className="flex px-2">
             <FontAwesomeIcon icon={faBuilding} />{" "}
-            <a href={corporatePsc.links.self}>{corporatePsc.title}</a>{" "}
+            <a className="font-bold mx-2" href={corporatePsc.links.self}>
+              {corporatePsc.title}
+            </a>
             <NaturesOfControl
               naturesOfControl={corporatePsc.natures_of_control}
             />

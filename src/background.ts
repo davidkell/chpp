@@ -3,7 +3,7 @@ const headers = {
   Authorization: "hcgHBMyoQKYEo3KhQXHIO0d_akc5yGaT8JVYMW-2",
 };
 
-const fetch_psc = async (companyNumber: string) => {
+const fetchPsc = async (companyNumber: string) => {
   const result = await fetch(
     `${CH_URL}/company/${companyNumber}/persons-with-significant-control`,
     { headers }
@@ -31,9 +31,18 @@ const fetch_psc = async (companyNumber: string) => {
   return pscs.items;
 };
 
-const search_corporate = async (psc_name: string) => {
+const searchCorporate = async (pscName: string) => {
   const result = await fetch(
-    `${CH_URL}/search/companies?q=${encodeURI(psc_name)}`,
+    `${CH_URL}/search/companies?q=${encodeURI(pscName)}`,
+    { headers }
+  );
+  const search = await result.json();
+  return search.items[0];
+};
+
+const searchIndividual = async (pscName: string) => {
+  const result = await fetch(
+    `${CH_URL}/search/officers?q=${encodeURI(pscName)}`,
     { headers }
   );
   const search = await result.json();
@@ -43,11 +52,15 @@ const search_corporate = async (psc_name: string) => {
 //@ts-ignore
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.contentScriptQuery == "queryPSCs") {
-    fetch_psc(request.companyNumber).then(sendResponse);
+    fetchPsc(request.companyNumber).then(sendResponse);
     return true;
   }
   if (request.contentScriptQuery == "queryCorporatePSC") {
-    search_corporate(request.companyName).then(sendResponse);
+    searchCorporate(request.companyName).then(sendResponse);
+    return true;
+  }
+  if (request.contentScriptQuery == "queryIndividualPSC") {
+    searchIndividual(request.companyName).then(sendResponse);
     return true;
   }
 });
