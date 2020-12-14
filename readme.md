@@ -1,5 +1,7 @@
 # Companies House ++
 
+![Companies House ++ preview](assets/screenshot.png "Companies House ++ preview")
+
 Chrome plugin to inject the company ownership hierarchy into a Companies House page.
 
 Under the hood, it uses the [Companies House API](https://developer.company-information.service.gov.uk/api/docs/) to recursively fetch people of significant control (PSCs), and then search for corporate PSCs in the search API.
