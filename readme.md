@@ -1,23 +1,23 @@
-# Chrome Extension boilerplate created with React Typescript
+# Companies House ++
+
+Chrome plugin to inject the company ownership hierarchy into a Companies House page.
+
+Under the hood, it uses the [Companies House API](https://developer.company-information.service.gov.uk/api/docs/) to recursively fetch people of significant control (PSCs), and then search for corporate PSCs in the search API.
+
+This project is on the [react-typescript-chrome-extension-boilerplate](https://github.com/sivertschou/react-typescript-chrome-extension-boilerplate.git), with inspiration on using [React in content-scripts](https://github.com/yosevu/react-content-script) and [hot-reloading](https://github.com/xpl/crx-hotreload).
 
 ## Getting started
-
-Create a project based on this boilerplate.
-
-```
-$ npx degit https://github.com/sivertschou/react-typescript-chrome-extension-boilerplate.git <project-name>
-```
 
 Navigate to the project directory and install the dependencies.
 
 ```
-$ npm install
+$ yarn
 ```
 
 To build the extension, and rebuild it when the files are changed, run
 
 ```
-$ npm start
+$ yarn start
 ```
 
 After the project has been built, a directory named `dist` has been created. You have to add this directory to your Chrome browser:
